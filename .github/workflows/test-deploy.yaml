@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Deploy AWS
-        uses: "Geun-Oh/Composite-S3-CloudFront@latest"
+        uses: "Geun-Oh/Composite-S3-CloudFront@0.1.0"
         with:
           filepath: "/test"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
