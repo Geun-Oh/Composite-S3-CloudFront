@@ -16,5 +16,5 @@ resource "aws_s3_object" "test" {
 
 resource "aws_s3_bucket_policy" "cloudfront_oac_policy" {
   bucket = aws_s3_bucket.test.id
-  policy = data.aws_iam_policy_document.s3_policy.json
+  policy = data.aws_iam_policy_document.s3_oac_policy.json
 }
