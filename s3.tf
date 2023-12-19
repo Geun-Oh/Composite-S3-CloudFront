@@ -8,10 +8,12 @@ resource "aws_s3_bucket_acl" "test" {
 }
 
 resource "aws_s3_object" "test" {
-  bucket = aws_s3_bucket.test.id
-  key    = "test_object_key"
-  source = var.filepath
-  etag   = filemd5(var.filepath)
+  for_each = { for f in fileset("${path.module}/dist", "**/*") : f => f }
+
+  bucket = aws_s3_bucket.bucket.id
+  key    = each.value
+  source = "${path.module}/${var.filepath}/${each.value}"
+  etag   = filemd5("${path.module}/${var.filepath}/${each.value}")
 }
 
 resource "aws_s3_bucket_policy" "cloudfront_oac_policy" {
