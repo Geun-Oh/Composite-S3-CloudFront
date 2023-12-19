@@ -18,8 +18,8 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Deploy AWS
-        uses: "Geun-Oh/Composite-S3-CloudFront@0.3.0"
+        uses: Geun-Oh/Composite-S3-CloudFront@0.4.0
         with:
-          filepath: "${path.module}/test"
+          filepath: "test"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
