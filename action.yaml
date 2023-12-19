@@ -17,7 +17,12 @@ inputs:
     required: true
 
 runs:
-  using: "composite"
+  using: composite
+
+  defaults:
+    runs:
+      shell: bash
+
   steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
