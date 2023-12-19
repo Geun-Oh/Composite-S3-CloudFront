@@ -1,6 +1,4 @@
 *.secret
 
-test
-
 .terraform.lock.hcl
 .terraform/**/*
