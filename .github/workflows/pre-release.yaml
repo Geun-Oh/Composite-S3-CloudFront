@@ -9,16 +9,21 @@ jobs:
   pre-release:
     name: "Pre Release"
     runs-on: "ubuntu-latest"
+    if: contains(github.event.head_commit.message, 'release')
 
     steps:
       - name: "Build & test"
         run: |
           echo "Release Start"
 
+      - name: Extract Version
+        run: echo "##[set-output name=version;]$(echo '${{ github.event.head_commit.message }}' | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}')"
+        id: extract_version_name
+
       - uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: "latest"
+          repo_token: ${{ secrets.WORKFLOW_TOKEN }}
+          automatic_release_tag: ${{ steps.extract_version_name.outputs.version }}
           prerelease: true
           title: "Development Build"
           files: |
