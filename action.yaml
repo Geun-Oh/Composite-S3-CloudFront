@@ -1,0 +1,36 @@
+name: Deploy static site with s3&cloudfront
+description: deploy your own site with s3&cloudfront
+
+branding:
+  icon: "globe"
+  color: "blue"
+
+inputs:
+  filepath:
+    description: where your build file located
+    required: true
+  aws_access_key:
+    description: iam access key
+    required: true
+  aws_secret_key:
+    description: iam secret key
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Apply
+      run: make deploy
+      env:
+        TF_VAR_filepath: ${{ inputs.filepath }}
+        TF_VAR_aws_access_key: ${{ inputs.aws_access_key }}
+        TF_VAR_aws_secret_key: ${{ inputs.aws_secret_key }}
