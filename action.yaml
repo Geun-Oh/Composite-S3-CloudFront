@@ -18,23 +18,20 @@ inputs:
 
 runs:
   using: composite
+  runs-on: ubuntu-latest
 
   steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      shell: bash
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
-      shell: bash
 
     - name: Terraform Init
       run: terraform init
-      shell: bash
 
     - name: Terraform Apply
       run: make deploy
-      shell: bash
       env:
         TF_VAR_filepath: ${{ inputs.filepath }}
         TF_VAR_aws_access_key: ${{ inputs.aws_access_key }}
