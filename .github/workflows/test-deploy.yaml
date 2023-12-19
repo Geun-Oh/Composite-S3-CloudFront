@@ -20,6 +20,6 @@ jobs:
       - name: Deploy AWS
         uses: "Geun-Oh/Composite-S3-CloudFront@0.3.0"
         with:
-          filepath: "/test"
+          filepath: "${path.module}/test"
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
