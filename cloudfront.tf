@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     max_ttl                = 86400
   }
 
-  price_class = "PrivateClass_All"
+  price_class = "PriceClass_200"
 
   restrictions {
     geo_restriction {
