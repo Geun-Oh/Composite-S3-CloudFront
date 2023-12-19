@@ -25,9 +25,7 @@ runs:
       shell: bash
 
     - name: Terraform Apply
-      run: |
-	terraform plan
-	terraform apply -auto-approve 
+      run: terraform plan && terraform apply -auto-approve 
       shell: bash
       env:
         TF_VAR_filepath: ${{ inputs.filepath }}
